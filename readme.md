@@ -1,8 +1,9 @@
 ## Camaras APP
+
 Aplicación que tiene el control de cámaras instaladas.
 
 ## Instalación
-composer install
-cp .env.example .env
-php artisan key:generate
-php artisan migrate
+1. composer install
+2. cp .env.example .env
+3. php artisan key:generate
+4. php artisan migrate
