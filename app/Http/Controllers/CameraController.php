@@ -37,7 +37,7 @@ class CameraController extends Controller
             'detail' => 'Cambiar lente'
         ];
 
-        //\Auth::user()->notify(new alertMaintenance($maintenance));
+        \Auth::user()->notify(new alertMaintenance($maintenance));
 
         return view('internal-cameras', [
             'cameras' => $cameras
