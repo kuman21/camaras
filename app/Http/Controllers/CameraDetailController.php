@@ -32,7 +32,7 @@ class CameraDetailController extends Controller
         $maintenance->detail = strtolower($request->detail);
         $maintenance->save();
 
-        return redirect()->route('cameraDetail', ['id' => $maintenance->camera_id, 'type' => 'm'])->with('success', 'El mantenimiento se ha agregado correctamente');
+        return redirect()->route('cameraDetail', ['id' => $maintenance->camera_id])->with('success', 'El mantenimiento se ha agregado correctamente');
     }
 
     public function applied(Request $request)
@@ -49,5 +49,25 @@ class CameraDetailController extends Controller
 
             return response()->json($maintenance);
         }
+    }
+
+    public function destroyMaintenance($id)
+    {
+        $maintenance = Maintenance::find($id);
+        $cameraId = $maintenance->camera_id;
+
+        $maintenance->delete();
+
+        return redirect()->route('cameraDetail', ['id' => $cameraId])->with('success', 'El mantenimiento se ha eliminado correctamente');
+    }
+
+    public function destroyIncident($id)
+    {
+        $incident = Incident::find($id);
+        $cameraId = $incident->camera_id;
+
+        $incident->delete();
+
+        return redirect()->route('cameraDetail', ['id' => $cameraId])->with('success', 'La Inicdencia se ha eliminado correctamente');
     }
 }

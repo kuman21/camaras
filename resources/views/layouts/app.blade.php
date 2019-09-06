@@ -59,9 +59,9 @@
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     @if (count(Auth::user()->unreadNotifications) === 0)
-                                        NOTIFICACIONES
+                                        <i class="fas fa-bell"></i>
                                     @else
-                                        NOTIFICACIONES <span class="badge badge-danger">{{ count(Auth::user()->unreadNotifications) }}</span>
+                                        <i class="fas fa-bell"></i> <span class="badge badge-danger">{{ count(Auth::user()->unreadNotifications) }}</span>
                                     @endif
                                 </a>
 

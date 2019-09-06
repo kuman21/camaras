@@ -12,9 +12,11 @@ Route::get('/camera-detail/{id}/{notification_id?}/{type?}', 'CameraController@c
 
 Route::post('/save-camera', 'CameraController@store')->name('saveCamera');
 
-Route::post('/save-incedent', 'CameraDetailController@saveIncident')->name('saveIncident');
+Route::post('/save-incident', 'CameraDetailController@saveIncident')->name('saveIncident');
 Route::post('/save-maintenance', 'CameraDetailController@saveMaintenance')->name('saveMaintenance');
 Route::post('camera-detail/applied', 'CameraDetailController@applied');
+Route::delete('/destroy-maintenance/{id}', 'CameraDetailController@destroyMaintenance')->name('destroyMaintenance');
+Route::delete('/destroy-incident/{id}', 'CameraDetailController@destroyIncident')->name('destroyIncident');
 
 Route::fallback(function () {
     return view('error');

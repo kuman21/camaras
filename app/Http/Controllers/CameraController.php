@@ -37,7 +37,7 @@ class CameraController extends Controller
             'detail' => 'Cambiar lente'
         ];
 
-        \Auth::user()->notify(new alertMaintenance($maintenance));
+        //\Auth::user()->notify(new alertMaintenance($maintenance));
 
         return view('internal-cameras', [
             'cameras' => $cameras
@@ -66,7 +66,7 @@ class CameraController extends Controller
      * 
      * @return view
      */
-    public function cameraDetail($id, $notificationId = null, $type = 'i')
+    public function cameraDetail($id, $notificationId = null)
     {   
         if ($notificationId !== null) {
             foreach (\Auth::user()->unreadNotifications as $notification) {
@@ -82,8 +82,7 @@ class CameraController extends Controller
         return view('camera-detail', [
             'camera' => $camera,
             'incidents' => $incidents,
-            'maintenances' => $maintenances,
-            'type' => $type
+            'maintenances' => $maintenances
         ]);
     }
 

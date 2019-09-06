@@ -40,10 +40,10 @@
             <hr>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link text-ciu {{ ($type === 'i') ? 'active' : '' }}" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">INCIDENCIAS</a>
+                    <a class="nav-link text-ciu active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">INCIDENCIAS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-ciu {{ ($type === 'm') ? 'active' : '' }}" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">MANTENIMIENTOS PREVENTIVOS</a>
+                    <a class="nav-link text-ciu" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">MANTENIMIENTOS PREVENTIVOS</a>
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
@@ -69,7 +69,13 @@
                                     <td>{{ date('m/d/Y', strtotime($incident->date)) }}</td>
                                     <td>{{ strtoupper($incident->detail) }}</td>
                                     <td>
-                                        <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                        <form method="POST" action="{{ route('destroyIncident', ['id' => $incident->id]) }}">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -88,15 +94,19 @@
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     <div class="mb-4"></div>
                     <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">FECHA</th>
-                                <th scope="col">DETALLE</th>
-                                <th scope="col">APLICADO</th>
-                                <th scope="col">ACCIONES</th>
-                            </tr>
-                        </thead>
+                        @if (count($maintenances) > 0)
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">FECHA</th>
+                                    <th scope="col">DETALLE</th>
+                                    <th scope="col">APLICADO</th>
+                                    <th scope="col">ACCIONES</th>
+                                </tr>
+                            </thead>
+                        @else
+                            <p>Aun no se han agregado mantenimientos.</p>
+                        @endif
                         <tbody>
                             @foreach ($maintenances as $index => $maintenance)
                                 <tr>
@@ -117,7 +127,13 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                        <form method="POST" action="{{ route('destroyMaintenance', ['id' => $maintenance->id]) }}">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
