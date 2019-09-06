@@ -1,0 +1,98 @@
+body {
+    background-color: #0b449e;
+}
+
+html,
+body,
+.container {
+    height: 100%;
+}
+
+.text-ciu {
+    color: #0b449e;
+}
+
+.bg-ciu {
+    background-color: #0b449e;
+}
+
+.bg-ciu-light {
+    background-color: #f3f3f3;
+}
+
+.bg-login {
+    background-color: #626262;
+}
+
+.card-ciu {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+}
+
+.card-body-ciu {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+    border: none;
+}
+
+.container-ciu {
+    background-color: #f3f3f3;
+    height: 100%;
+}
+
+
+.btn-ciu {
+    color: #fff;
+    background-color: #0b449e;
+    border-color: #0b449e;
+}
+  
+.btn-ciu:hover {
+    color: #fff;
+    background-color: #0b4597;
+    border-color: #0b4597;
+}
+
+.btn-ciu-light {
+    color: #0b449e;
+    background-color: #f3f3f3;
+    border-color: #f3f3f3;
+}
+
+.btn-ciu-light:hover {
+    color: #0b449e;
+    background-color: #fee40e;
+    border-color: #fee40e;
+}
+
+.btn-ciu-dark {
+    color: #ffffff;
+    background-color: #0b449e;
+    border-color: #0b449e;
+}
+
+.btn-ciu-dark:hover {
+    color: #ffffff;
+    background-color: #fee40e;
+    border-color: #fee40e;
+}
+
+.text-ciu-yellow {
+    color: #fee40e;
+}
+
+.text-ciu-yellow:hover {
+    color: #ffffff;
+}
+
+.fs-100 {
+    font-size: 100px;
+}
