@@ -19,5 +19,5 @@ Route::delete('/destroy-maintenance/{id}', 'CameraDetailController@destroyMainte
 Route::delete('/destroy-incident/{id}', 'CameraDetailController@destroyIncident')->name('destroyIncident');
 
 Route::fallback(function () {
-    return view('error');
+    return redirect('/internal-cameras');
 });

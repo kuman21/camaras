@@ -96,3 +96,34 @@ body,
 .fs-100 {
     font-size: 100px;
 }
+
+.navbar-badge {
+    font-size: .6rem;
+    font-weight: 300;
+    padding: 2px 4px;
+    position: absolute;
+    right: 22px;
+    top: 5px;
+}
+
+.dropdown-menu-lg {
+    max-width: 300px;
+    min-width: 200px;
+    padding: 0;
+}
+
+.dropdown-menu-lg .dropdown-divider {
+    margin: 0;
+}
+
+.dropdown-menu-lg .dropdown-item {
+    padding: 0.5rem 1rem;
+}
+
+.dropdown-menu-lg p {
+    margin: 0;
+    white-space: normal;
+}
+
+
+

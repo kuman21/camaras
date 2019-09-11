@@ -32,13 +32,6 @@ class CameraController extends Controller
         ->where('status', 1)
         ->get();
 
-        $maintenance = [
-            'camera_id' => '1',
-            'detail' => 'Cambiar lente'
-        ];
-
-        //\Auth::user()->notify(new alertMaintenance($maintenance));
-
         return view('internal-cameras', [
             'cameras' => $cameras
         ]);
@@ -76,8 +69,8 @@ class CameraController extends Controller
             }
         }
         $camera = Camera::find($id);
-        $incidents = Incident::where('camera_id', $id)->get();
-        $maintenances = Maintenance::where('camera_id', $id)->get();
+        $incidents = Incident::where('camera_id', $id)->orderBy('id', 'desc')->paginate(5);
+        $maintenances = Maintenance::where('camera_id', $id)->orderBy('id', 'desc')->paginate(5);
 
         return view('camera-detail', [
             'camera' => $camera,

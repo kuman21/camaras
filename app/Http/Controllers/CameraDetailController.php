@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Notifications\alertMaintenance;
 use App\Incident;
 use App\Maintenance;
 
@@ -31,6 +32,8 @@ class CameraDetailController extends Controller
         $maintenance->date = $request->date;
         $maintenance->detail = strtolower($request->detail);
         $maintenance->save();
+
+        \Auth::user()->notify(new alertMaintenance($maintenance));
 
         return redirect()->route('cameraDetail', ['id' => $maintenance->camera_id])->with('success', 'El mantenimiento se ha agregado correctamente');
     }

@@ -24,6 +24,16 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+    @auth
+        @php
+            $cont = 0;
+            foreach (\Auth::user()->unreadNotifications as $notification) {
+                if ($notification->data['date'] === date('Y-m-d')) {
+                    $cont++;
+                }
+            }
+        @endphp
+    @endauth
     <div class="container container-ciu w-50 shadow">
         <nav class="navbar navbar-expand-md navbar-light bg-transparent">
             <div class="container">
@@ -58,28 +68,33 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    @if (count(Auth::user()->unreadNotifications) === 0)
+                                    @if ($cont === 0)
                                         <i class="fas fa-bell"></i>
                                     @else
-                                        <i class="fas fa-bell"></i> <span class="badge badge-danger">{{ count(Auth::user()->unreadNotifications) }}</span>
+                                        <i class="fas fa-bell"></i> <span class="badge badge-danger navbar-badge">{{ $cont }}</span>
                                     @endif
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <div class="dropdown-header text-center">
-                                        {{ count(Auth::user()->unreadNotifications) }} NOTIFICACIONES SIN LEER
+                                        {{ $cont }} NOTIFICACIONES SIN LEER
                                     </div>
                                     <div class="dropdown-divider"></div>
-                                    @foreach (Auth::user()->unreadNotifications as $notification) 
-                                            <a class="dropdown-item text-success" href="{{ route('cameraDetail', ['id' => $notification->data['camera_id'], 'notification_id' => $notification->id]) }}">
-                                                Acción: {{ $notification->data['detail'] }}
-                                            </a>
+
+                                    @foreach (Auth::user()->unreadNotifications as $notification)
+                                            @if ($notification->data['date'] <= date('Y-m-d'))
+                                                <a class="dropdown-item text-success" href="{{ route('cameraDetail', ['id' => $notification->data['camera_id'], 'notification_id' => $notification->id]) }}">
+                                                    <i class="fas fa-tools mr-2"></i> {{ $notification->data['description'].' '.$notification->data['type'] }} TIENE PROGRAMADO UN MANTENIMIENTO.
+                                                </a>
+                                            @endif
                                     @endforeach
 
-                                    @foreach (Auth::user()->notifications as $notification) 
-                                        <a class="dropdown-item" href="{{ route('cameraDetail', ['id' => $notification->data['camera_id'], 'notification_id' => $notification->id]) }}">
-                                            Acción: {{ $notification->data['detail'] }}
-                                        </a>
+                                    @foreach (Auth::user()->notifications as $notification)
+                                        @if ($notification->read_at !== null)
+                                            <a class="dropdown-item" href="{{ route('cameraDetail', ['id' => $notification->data['camera_id']]) }}">
+                                                <i class="fas fa-tools mr-2"></i> {{ $notification->data['description'].' '.$notification->data['type'] }} TIENE PROGRAMADO UN MANTENIMIENTO.
+                                            </a>
+                                        @endif
                                     @endforeach
                                 </div>
                             </li>

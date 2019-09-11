@@ -6,19 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use App\Camera;
 
 class alertMaintenance extends Notification
 {
     use Queueable;
+    protected $maintenance;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($maintenance)
     {
-        //
+        $this->maintenance = $maintenance;
     }
 
     /**
@@ -54,9 +56,14 @@ class alertMaintenance extends Notification
      */
     public function toArray($notifiable)
     {
+        $camera = Camera::find($this->maintenance->camera_id);
+        ($camera->type === 'I') ? $type = 'INTERNA' : $type = 'EXTERNA';
+
         return [
-            'camera_id' => '1',
-            'detail' => 'cambio de lente',
+            'camera_id' => $this->maintenance->camera_id,
+            'date' => $this->maintenance->date,
+            'description' => $camera->description,
+            'type' => $type
         ];
     }
 }

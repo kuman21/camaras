@@ -20,8 +20,8 @@
             </div>
 
             <div class="row">
-                <div class="col"></div>
-                <div class="col">
+                <div class="col-2"></div>
+                <div class="col-8">
                     <div class="card bg-login">
                         <div class="card-body">
                             <div class="row">
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col"></div>
+                <div class="col-2"></div>
             </div>
         </div>
     </div>

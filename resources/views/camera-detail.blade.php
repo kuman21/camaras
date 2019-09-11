@@ -66,7 +66,7 @@
                             @foreach ($incidents as $index => $incident)
                                 <tr>
                                     <th scope="row">{{ $index + 1 }}</th>
-                                    <td>{{ date('m/d/Y', strtotime($incident->date)) }}</td>
+                                    <td>{{ date('d/m/Y', strtotime($incident->date)) }}</td>
                                     <td>{{ strtoupper($incident->detail) }}</td>
                                     <td>
                                         <form method="POST" action="{{ route('destroyIncident', ['id' => $incident->id]) }}">
@@ -79,7 +79,6 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            
                         </tbody>
                         <tfoot>
                             <tr>
@@ -89,6 +88,9 @@
                             </tr>
                         </tfoot>
                     </table>
+                    @php
+                        echo $incidents->render();
+                    @endphp
                 </div>
 
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -111,7 +113,7 @@
                             @foreach ($maintenances as $index => $maintenance)
                                 <tr>
                                     <th scope="row">{{ $index + 1 }}</th>
-                                    <td>{{ date('m/d/Y', strtotime($maintenance->date)) }}</td>
+                                    <td>{{ date('d/m/Y', strtotime($maintenance->date)) }}</td>
                                     <td>{{ strtoupper($maintenance->detail) }}</td>
                                     <td>
                                         @if ($maintenance->applied)
@@ -137,7 +139,6 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            
                         </tbody>
                         <tfoot>
                             <tr>
@@ -147,6 +148,9 @@
                             </tr>
                         </tfoot>
                     </table>
+                    @php
+                        echo $maintenances->render();
+                    @endphp
                 </div>
             </div>
         </div>
